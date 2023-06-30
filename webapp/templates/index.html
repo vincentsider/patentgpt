@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Patent Attorney</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+    <header>
+        <h1>Virtual Patent Attorney</h1>
+    </header>
+    <main>
+        <section id="searchForm">
+            <h2>Patent Search</h2>
+            <form action="{{ url_for('search_patent') }}" method="post">
+                {{ form.hidden_tag() }}
+                <p>{{ form.idea.label }} {{ form.idea() }}</p>
+                <p>{{ form.submit() }}</p>
+            </form>
+        </section>
+        <section id="resultsTable">
+            <!-- Results will be populated here by main.js -->
+        </section>
+        <section id="costEstimate">
+            <!-- Cost estimate will be populated here by main.js -->
+        </section>
+    </main>
+    <footer>
+        <p>© 2022 Virtual Patent Attorney</p>
+    </footer>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div id="errorMessage">
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
