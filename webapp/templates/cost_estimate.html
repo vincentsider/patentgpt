@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patent Cost Estimate</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Patent Cost Estimate</h1>
+        {% if estimateSuccess %}
+            <div class="alert alert-success">
+                {{ get_flashed_messages(category_filter=["estimateSuccess"])[0] }}
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Patent Type</th>
+                        <th>Estimated Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ costEstimate.patent_type }}</td>
+                        <td>{{ costEstimate.estimated_cost }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        {% elif estimateFailure %}
+            <div class="alert alert-danger">
+                {{ get_flashed_messages(category_filter=["estimateFailure"])[0] }}
+            </div>
+        {% endif %}
+        <a href="{{ url_for('index') }}" class="btn btn-primary">Back to Search</a>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
